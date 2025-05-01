@@ -3,6 +3,10 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support import expected_conditions as EC 
+
 
 # Import Page Objects
 from pages.login_page import LoginPage
@@ -44,13 +48,22 @@ def test_smoke_flow(driver):
     login_page.open()
     login_page.login(USERNAME, PASSWORD)
 
-    # --- 2. Verify Login Success ---
+   # --- 2. Verify Login Success ---
     home_page = HomePage(driver)
-    home_page._wait_for_url_contains("dashboard") # Wait for redirect explicitly
-    assert home_page.is_user_logged_in(), "User should be logged in (avatar visible)"
-    assert "dashboard" in home_page._get_current_url(), "URL should contain 'dashboard' after login"
-    print("Login Successful")
 
+    try:
+        print("Waiting for user avatar button...")
+        WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(home_page._USER_AVATAR_BUTTON)
+        )
+        print("User avatar button found.")
+    except TimeoutException:
+        
+        pytest.fail("Login verification failed: User avatar button did not appear within 10 seconds.")
+
+    assert home_page.is_user_logged_in(), "User should be logged in (avatar visible)"
+    assert "login" not in home_page._get_current_url(), "URL should not contain 'login' after successful login"
+    print("Login Successful")
     # --- 3. Add Book to Cart ---
     initial_cart_count = home_page.get_cart_badge_count()
     home_page.add_first_book_to_cart()

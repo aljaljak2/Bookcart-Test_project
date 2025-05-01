@@ -7,7 +7,7 @@ class LoginPage(BasePage):
     # Locators
     _USERNAME_INPUT = (By.CSS_SELECTOR, "input[formcontrolname='username']")
     _PASSWORD_INPUT = (By.CSS_SELECTOR, "input[formcontrolname='password']")
-    _LOGIN_BUTTON = (By.CSS_SELECTOR, "button[color='primary']") # More specific might be needed if others exist
+    _LOGIN_BUTTON = (By.CSS_SELECTOR, "button[mat-raised-button][color='primary']")  
     _LOGIN_ERROR_MESSAGE = (By.CSS_SELECTOR, "mat-error.mat-error") # Locator for error messages
 
     def open(self):

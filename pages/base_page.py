@@ -17,9 +17,13 @@ class BasePage:
     def _find_element(self, locator: tuple) -> WebElement:
         """Finds a single element, waiting until it's visible."""
         try:
-            return self.wait.until(EC.visibility_of_element_located(locator))
+            # print(f"Finding element: {locator}") # Debug print
+            element = self.wait.until(EC.visibility_of_element_located(locator))
+            # print("Element found and visible.") # Debug print
+            return element
         except TimeoutException:
-            raise NoSuchElementException(f"Element with locator {locator} not found within timeout.")
+            # print(f"Timeout finding element: {locator}") # Debug print
+            raise NoSuchElementException(f"Element with locator {locator} not found or not visible within timeout.")
 
     def _find_elements(self, locator: tuple) -> List[WebElement]:
         """Finds multiple elements, waiting until at least one is visible."""
@@ -38,11 +42,14 @@ class BasePage:
         element.click()
 
     def _send_keys(self, locator: tuple, text: str):
-        """Finds an element, clears it, and sends keys."""
-        element = self._find_element(locator)
-        element.clear()
-        element.send_keys(text)
-
+        """Finds an element, waits for it to be clickable, clears it, and sends keys."""
+        try:
+            element = self.wait.until(EC.element_to_be_clickable(locator))
+            element.clear()
+            element.send_keys(text)
+        except TimeoutException:
+            raise NoSuchElementException(f"Element with locator {locator} not interactable for send_keys within timeout.")
+        
     def _get_text(self, locator: tuple) -> str:
         """Finds an element and returns its text."""
         element = self._find_element(locator)

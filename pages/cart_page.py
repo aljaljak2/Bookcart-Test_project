@@ -6,12 +6,12 @@ class CartPage(BasePage):
 
     # Locators
     _CHECKOUT_BUTTON = (By.XPATH, "//button[contains(., 'CheckOut')]")
-    _CART_ITEMS_ROWS = (By.CSS_SELECTOR, "mat-card.cart-item") # Assuming items are in cards
+    _CART_ITEMS_ROWS = (By.CSS_SELECTOR, "tr.mat-mdc-row")
     _EMPTY_CART_MESSAGE = (By.XPATH, "//mat-card-title[contains(text(), 'Shopping cart is empty')]") # Adjust if needed
     _CART_TOTAL = (By.CSS_SELECTOR, "td > strong") # Might need more specific locator
 
     def click_checkout(self):
-        self._click(self._CHECKOUT_BUTTON)
+        self._click(self._CHECKOUT_BUTTON) 
 
     def is_cart_empty(self) -> bool:
         """Checks if the 'empty cart' message is displayed."""
