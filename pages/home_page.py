@@ -8,6 +8,7 @@ class HomePage(BasePage):
 
     # Locators
     _USER_AVATAR_BUTTON = (By.CSS_SELECTOR, ".mat-mdc-menu-trigger > mat-icon:nth-child(2)")
+    _ARROW_DROPDOWN_BUTTON = (By.CSS_SELECTOR, "mat-icon.mat-icon:nth-child(3)")
     _LOGOUT_BUTTON = (By.XPATH, "//button[contains(., 'Logout')]") # More specific XPath
     _CART_ICON_BUTTON = (By.CSS_SELECTOR, "button.mdc-icon-button:nth-child(2)") 
     _CART_BADGE = (By.CSS_SELECTOR, "#mat-badge-content-0") # Check this ID in browser dev tools
@@ -18,9 +19,7 @@ class HomePage(BasePage):
         return self._is_element_displayed(self._USER_AVATAR_BUTTON)
 
     def click_logout(self):
-        # Sometimes requires clicking the avatar first if it's a dropdown
-        # self._click(self._USER_AVATAR_BUTTON) # Uncomment if needed
-        # self.wait.until(EC.visibility_of_element_located(self._LOGOUT_BUTTON)) # Wait if dropdown
+        self._click(self._ARROW_DROPDOWN_BUTTON)
         self._click(self._LOGOUT_BUTTON)
 
     def click_cart_icon(self):

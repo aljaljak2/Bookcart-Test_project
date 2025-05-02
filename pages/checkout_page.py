@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
-
+from selenium.webdriver.support import expected_conditions as EC 
 class CheckoutPage(BasePage):
     """Page Object for the Checkout page."""
 
@@ -12,6 +12,7 @@ class CheckoutPage(BasePage):
     _STATE_INPUT = (By.CSS_SELECTOR, "mat-form-field.mat-mdc-form-field:nth-child(5) input")
     _PLACE_ORDER_BUTTON = (By.XPATH, "//button[contains(., 'Place Order')]")
     _CANCEL_BUTTON = (By.XPATH, "//button[contains(., 'Cancel')]")
+    _SNACKBAR_MESSAGE = (By.XPATH, "//*[contains(text(), 'Order placed successfully')]")
     # Order Confirmation - Can be on a separate page or handled here
     _ORDER_SUCCESS_MESSAGE = (By.XPATH, "//h1[contains(text(), 'Order placed successfully')]")
 
@@ -47,5 +48,5 @@ class CheckoutPage(BasePage):
     def is_order_successful(self) -> bool:
         """Checks if the order success message is displayed."""
         # Wait specifically for the success message
-        self.wait.until(EC.visibility_of_element_located(self._ORDER_SUCCESS_MESSAGE))
-        return self._is_element_displayed(self._ORDER_SUCCESS_MESSAGE)
+        self.wait.until(EC.presence_of_element_located(self._SNACKBAR_MESSAGE))
+        return self._is_element_displayed(self._SNACKBAR_MESSAGE)
