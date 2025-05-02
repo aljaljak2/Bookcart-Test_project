@@ -119,8 +119,7 @@ Your generated `requirements.txt` will include these and any other libraries the
 
 Manual test cases (including positive, negative, and the selection for smoke tests) can be found in:
 
-*   `[Path/To/Your/Test/Case/Document.md]` (or `.pdf`, `.xlsx`, etc. - **Replace this placeholder**)
-
+*   `[https://github.com/aljaljak2/Bookcart-Test_project/blob/main/Documentation-testing.pdf]` 
 ## Bug Reporting
 
 Bugs found during testing (both manual and automated) are tracked using GitHub Issues for this repository.
