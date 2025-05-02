@@ -1,5 +1,5 @@
-# Bookcart-Test_project - Automated Smoke Tests for [Bookcart app ]( https://bookcart.azurewebsites.net/)
-
+# Bookcart-Test_project - Automated Smoke Tests for Bookcart app 
+Bookcart app is deployed here: (https://bookcart.azurewebsites.net/)
 ## Overview
 
 This repository contains automated smoke tests for the [Name of Web Application Tested] application. The tests are written in Python using the `pytest` framework and `Selenium` for web browser automation.
@@ -125,4 +125,4 @@ Manual test cases (including positive, negative, and the selection for smoke tes
 
 Bugs found during testing (both manual and automated) are tracked using GitHub Issues for this repository.
 
-*   View existing bugs or report new ones here: [Link to repository's Issues tab] (https://github.com/aljaljak2/Bookcart-Test_project/issues)
+*   View existing bugs or report new ones here:(https://github.com/aljaljak2/Bookcart-Test_project/issues)
